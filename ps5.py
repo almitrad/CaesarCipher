@@ -1,6 +1,5 @@
 import string
 
-### DO NOT MODIFY THIS FUNCTION ###
 def load_words(file_name):
     '''
     file_name (string): the name of the file containing 
@@ -22,7 +21,6 @@ def load_words(file_name):
     in_file.close()
     return word_list
 
-### DO NOT MODIFY THIS FUNCTION ###
 def is_word(word_list, word):
     '''
     Determines if word is a valid word, ignoring
@@ -41,7 +39,6 @@ def is_word(word_list, word):
     word = word.strip(" !@#$%^&*()-_+={}[]|\:;'<>?,./\"")
     return word in word_list
 
-### DO NOT MODIFY THIS FUNCTION ###
 def get_story_string():
     """
     Returns: a joke in encrypted text.
@@ -53,9 +50,8 @@ def get_story_string():
 
 WORDLIST_FILENAME = 'words.txt'
 
-#Problem 1
 class Message(object):
-    ### DO NOT MODIFY THIS METHOD ###
+    
     def __init__(self, text):
         '''
         Initializes a Message object
@@ -68,7 +64,7 @@ class Message(object):
         self.message_text = text
         self.valid_words = load_words(WORDLIST_FILENAME)
 
-    ### DO NOT MODIFY THIS METHOD ###
+        
     def get_message_text(self):
         '''
         Used to safely access self.message_text outside of the class
@@ -77,7 +73,6 @@ class Message(object):
         '''
         return self.message_text
 
-    ### DO NOT MODIFY THIS METHOD ###
     def get_valid_words(self):
         '''
         Used to safely access a copy of self.valid_words outside of the class
@@ -85,6 +80,7 @@ class Message(object):
         Returns: a COPY of self.valid_words
         '''
         return self.valid_words[:]
+        
         
     def build_shift_dict(self, shift):
         '''
@@ -132,7 +128,7 @@ class Message(object):
       
         return shiftDict
         
-
+        
     def apply_shift(self, shift):
         '''
         Applies the Caesar Cipher to self.message_text with the input shift.
@@ -179,6 +175,7 @@ class PlaintextMessage(Message):
         self.encrypting_dict = Message.build_shift_dict(self, shift)
         self.message_text_encrypted = Message.apply_shift(self, shift)
         
+        
     def get_shift(self):
         '''
         Used to safely access self.shift outside of the class
@@ -187,6 +184,7 @@ class PlaintextMessage(Message):
         '''
         return self.shift
 
+    
     def get_encrypting_dict(self):
         '''
         Used to safely access a copy self.encrypting_dict outside of the class
@@ -195,6 +193,7 @@ class PlaintextMessage(Message):
         '''
         return self.encrypting_dict.copy()
 
+    
     def get_message_text_encrypted(self):
         '''
         Used to safely access self.message_text_encrypted outside of the class
@@ -203,6 +202,7 @@ class PlaintextMessage(Message):
         '''
         return self.message_text_encrypted
 
+    
     def change_shift(self, shift):
         '''
         Changes self.shift of the PlaintextMessage and updates other 
@@ -217,8 +217,9 @@ class PlaintextMessage(Message):
         self.encrypting_dict = Message.build_shift_dict(self, self.shift)
         self.message_text_encrypted = Message.apply_shift(self, self.shift)
 
-#Problem 3
+
 class CiphertextMessage(Message):
+    
     def __init__(self, text):
         '''
         Initializes a CiphertextMessage object
@@ -273,7 +274,7 @@ class CiphertextMessage(Message):
         
         return maxCounterShiftTuples
 
-#Problem 4
+    
 def decrypt_story():
     encryptedStory = CiphertextMessage(get_story_string())
     return CiphertextMessage.decrypt_message(encryptedStory)
